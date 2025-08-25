@@ -50,24 +50,23 @@ class Unit:
         self.speed = speed
         self.range = range
         self.symbol = symbol
-        self.cost = 0
 
     def attack(self, target):
         target.hp -= self.damage
 
 class Knight(Unit):
     """Unité de mêlée avec des stats équilibrées."""
+    cost = 3
     def __init__(self, owner, position):
         symbol = "K" if owner.name == "Player" else "k"
         super().__init__(owner, position, hp=200, damage=50, speed=1, range=1, symbol=symbol)
-        self.cost = 3
 
 class Archer(Unit):
     """Unité à distance avec moins de vie mais une plus grande portée."""
+    cost = 3
     def __init__(self, owner, position):
         symbol = "A" if owner.name == "Player" else "a"
         super().__init__(owner, position, hp=100, damage=30, speed=1, range=5, symbol=symbol)
-        self.cost = 3
 
 # --- Classe principale du jeu ---
 
