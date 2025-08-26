@@ -240,6 +240,19 @@ class Game:
             elif self.selected_unit_type == Archer:
                 pygame.draw.circle(WIN, preview_color, mouse_pos, 15)
 
+        # --- Dessin des lignes de ciblage (Debug) ---
+        all_targets = self.player.towers + self.ai.towers + self.units
+        for unit in self.units:
+            enemy_targets = [t for t in all_targets if t.owner != unit.owner]
+            if not enemy_targets:
+                continue
+
+            enemy_targets.sort(key=lambda t: unit.pos.distance_to(t.pos))
+            closest_target = enemy_targets[0]
+
+            # Dessiner la ligne de ciblage
+            pygame.draw.line(WIN, WHITE, unit.pos, closest_target.pos, 1)
+
         pygame.display.update()
 
     def main_loop(self):
